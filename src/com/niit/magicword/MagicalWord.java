@@ -4,89 +4,84 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 
 public class MagicalWord {
 	public static void main(String [] args) throws IOException{
-		int i,n,n1,flag=0,count = 0,temp=0;
+		int n,n1,flag=0,count = 0,temp=0;
 		int[] array;
 		int max = 90;
+		String outPutText="";
+		Scanner scan = new Scanner(System.in);
 		 BufferedReader in=new BufferedReader(new InputStreamReader(System.in));
-		do
-        {
+	
             System.out.println("Enter the number of test cases(T)");
-            n=Integer.parseInt(in.readLine());
-            System.out.println("Enter the String/Strings");
-            for(i=1;i<=n;i++)
-           {
-            	  
-                      
-            	System.out.println("Enter name: "+ i);
-            	String name = in.readLine();
-            	/*name += Name[i];*/
-            	char[] asciivalue = name.toCharArray();
-            	for(char ch:asciivalue){
-            		int value=(int)ch;
-            		/*System.out.println(ch+"---->"+value);*/
-            		ArrayList<Integer> list = new ArrayList<Integer>();
-            		ArrayList<Integer> list1 = new ArrayList<Integer>();
-            		for ( n1 = 67; n1 < max; n1++) {
-                        boolean prime = true;
-
-
-                        for (int j = 2; j < n1; j++) {
-                            if (n1 % j == 0) {
-                                prime = false;
-                                break; 
-                                }
-                        }
-                        if (prime && n1 != 1) {
-                            list.add(n1);
-                            System.out.println(list);
-                        }
-                        
-                    }
-            	    list1.add(value);
-            	    System.out.println(list1);
-                    for (int k : list) {
-                    	
-                        /*System.out.println(k + " ");*/
-                    }
-                    for (int k2 : list1) {
-                         System.out.println(k2 + "<----------list of non prime");
-                     }
-                    if (list.contains(67) && list1.contains(65) && ((67-value)<=2)||(value-67<=2)){
-
-                		System.out.println("Swapped"+"A"+"---->"+(char)67);
-                	}
-                    if (list.contains(71) && list1.contains(70) && ((71-value)<=2)||(value-71<=2)){
-
-                		System.out.println("Swapped"+"F"+"---->"+(char)71);
-                	}
-                    if (list.contains(83) && list1.contains(82) && ((83-value)<=2)||(value-83<=2)){
-
-                		System.out.println("Swapped"+"R"+"---->"+(char)83);
-                	}
-                    if (list.contains(67) && list1.contains(69) && ((67-value)<=2)||(value-67<=2)){
-
-                		System.out.println("Swapped"+"E"+"---->"+(char)67);
-                	}
-                    if (list.contains(67) && list1.contains(69) && ((67-value)<=2)||(value-67<=2)){
-
-                		System.out.println("Swapped"+"E"+"---->"+(char)67);
-                	}
-                    if (list.contains(79) && list1.contains(65) && ((79-value)<=2)||(value-79<=2)){
-
-                		System.out.println("Swapped"+"N"+"---->"+(char)79);
-                	}
-                    
-              }
-              
-           }
-        }while(!((n<10)&&(n>0)));
-		
+            n=scan.nextInt();
+	
+            
+           
+            		// TODO Auto-generated method stub
+            		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+       
+            	        
+                    	System.out.println("Enter name: ");
+            			String k = br.readLine();
+            			for (int j = 0; j < k.length(); j++) {
+            			
+            				char a = k.charAt(j);
+            	
+            				/* outPutText += a;*/
+            				System.out.print(nearestPrime(a, a));
+            				}
+            			
+            				System.out.println();
+            		
+             
+        
+	
 	}
+		private static char nearestPrime(char a, char b) {
+			int leftascii = (int) a;
+			int rightascii = (int) b;
+			boolean left = false;
+			boolean right = false;
+			if ((leftascii >= 65 && leftascii <= 91) || ((leftascii >= 97 && leftascii <= 123))) {
+				left = isPrime(leftascii);
+			}
+			if ((rightascii >= 65 && rightascii <= 91) || ((rightascii >= 97 && rightascii <= 123))) {
+				right = isPrime(rightascii);
+			}
+	 
+			if ((left && right) || left) {
+				char result = (char) leftascii;
+				return result;
+			} else if (right) {
+				char result = (char) rightascii;
+				return result;
+			} else {
+				return nearestPrime((char) (leftascii-1), (char) (rightascii+1));
+			}
+		}
+		private static boolean isPrime(int n) {
+			 
+			int k = (int) Math.sqrt(n) + 1;
+			for (int i = 2; i <= k; i++) {
+				if (n % i == 0) {
+					return false;
+				}
+			}
+			return true;
+		}
 }
+
+
+	
+	
+
+
+	
+
 
 
 
